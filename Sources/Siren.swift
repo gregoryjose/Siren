@@ -283,15 +283,11 @@ private extension Siren {
 
     func showAlert() {
         
-        let message = alertType == .force ? forcedUpdateMessage : optionalUpdateMessage
+        
         let updateAvailableMessage = Bundle().localizedString(stringKey: alertTitle, forceLanguageLocalization: forceLanguageLocalization)
         
         var newVersionMessage = localizedNewVersionMessage()
         
-        if let message = message {
-            newVersionMessage = message
-        }
-
         let alertController = UIAlertController(title: updateAvailableMessage, message: newVersionMessage, preferredStyle: .alert)
 
         if let alertControllerTintColor = alertControllerTintColor {
@@ -393,7 +389,13 @@ private extension Siren {
 
 private extension Siren {
     func localizedNewVersionMessage() -> String {
-        let newVersionMessageToLocalize = "A new version of %@ is available. Please update to version %@ now."
+        
+        var newVersionMessageToLocalize = "A new version of %@ is available. Please update to version %@ now."
+        
+        if let message = alertType == .force ? forcedUpdateMessage : optionalUpdateMessage {
+            newVersionMessageToLocalize = message
+        }
+        
         let newVersionMessage = Bundle().localizedString(stringKey: newVersionMessageToLocalize, forceLanguageLocalization: forceLanguageLocalization)
 
         guard let currentAppStoreVersion = currentAppStoreVersion else {
