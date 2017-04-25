@@ -24,6 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupSiren() {
         let siren = Siren.shared
+        
+        siren.alertTitle = "Time for an upgrade!"
+        siren.forcedUpdateMessage = "You need to update your version of the %@ to continue. Update to version %@ now."
+        siren.optionalUpdateMessage = "Update your %@ to version %@ now."
+        siren.updateButtonTitle = "Let's go"
 
         // Optional
         siren.delegate = self

@@ -286,7 +286,7 @@ private extension Siren {
         
         let updateAvailableMessage = Bundle().localizedString(stringKey: alertTitle, forceLanguageLocalization: forceLanguageLocalization)
         
-        var newVersionMessage = localizedNewVersionMessage()
+        let newVersionMessage = localizedNewVersionMessage()
         
         let alertController = UIAlertController(title: updateAvailableMessage, message: newVersionMessage, preferredStyle: .alert)
 
@@ -406,7 +406,7 @@ private extension Siren {
     }
 
     func localizedUpdateButtonTitle() -> String {
-        return Bundle().localizedString(stringKey: "Update", forceLanguageLocalization: forceLanguageLocalization)
+        return Bundle().localizedString(stringKey: updateButtonTitle, forceLanguageLocalization: forceLanguageLocalization)
     }
 
     func localizedNextTimeButtonTitle() -> String {
