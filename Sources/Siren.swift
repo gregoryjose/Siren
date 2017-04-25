@@ -47,6 +47,13 @@ public final class Siren: NSObject {
             revisionUpdateAlertType = alertType
         }
     }
+    
+    public lazy var alertTitle = "Update Available"
+    
+    public var forcedUpdateMessage: String?
+    public var optionalUpdateMessage: String?
+    
+    public lazy var updateButtonTitle = "Update"
 
     /// Determines the type of alert that should be shown for major version updates: A.b.c
     /// Defaults to Siren.AlertType.option.
@@ -275,8 +282,15 @@ private extension Siren {
     }
 
     func showAlert() {
-        let updateAvailableMessage = Bundle().localizedString(stringKey: "Update Available", forceLanguageLocalization: forceLanguageLocalization)
-        let newVersionMessage = localizedNewVersionMessage()
+        
+        let message = alertType == .force ? forcedUpdateMessage : optionalUpdateMessage
+        let updateAvailableMessage = Bundle().localizedString(stringKey: alertTitle, forceLanguageLocalization: forceLanguageLocalization)
+        
+        var newVersionMessage = localizedNewVersionMessage()
+        
+        if let message = message {
+            newVersionMessage = message
+        }
 
         let alertController = UIAlertController(title: updateAvailableMessage, message: newVersionMessage, preferredStyle: .alert)
 
