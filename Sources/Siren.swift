@@ -97,6 +97,9 @@ public final class Siren: NSObject {
 
     /// The current version of your app that is available for download on the App Store
     public internal(set) var currentAppStoreVersion: String?
+    
+    /// The app bundle id, override for mocking
+    public lazy var appBundleId = Bundle.bundleID()
 
     internal var updaterWindow: UIWindow?
     fileprivate var appID: Int?
@@ -243,7 +246,7 @@ private extension Siren {
         components.host = "itunes.apple.com"
         components.path = "/lookup"
 
-        var items: [URLQueryItem] = [URLQueryItem(name: "bundleId", value: Bundle.bundleID())]
+        var items: [URLQueryItem] = [URLQueryItem(name: "bundleId", value: appBundleId)]
 
         if let countryCode = countryCode {
             let item = URLQueryItem(name: "country", value: countryCode)
