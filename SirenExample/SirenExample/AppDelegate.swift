@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        siren.appName = "Test App Name"
 
         // Optional - Defaults to .Option
-//        siren.alertType = .Option // or .Force, .Skip, .None
+//        siren.alertType = .option // or .force, .skip, .none
 
         // Optional - Can set differentiated Alerts for Major, Minor, Patch, and Revision Updates (Must be called AFTER siren.alertType, if you are using siren.alertType)
         siren.majorUpdateAlertType = .option
@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         siren.revisionUpdateAlertType = .option
         
         // Optional - Sets all messages to appear in Russian. Siren supports many other languages, not just English and Russian.
-//        siren.forceLanguageLocalization = .Russian
+//        siren.forceLanguageLocalization = .russian
 
         // Optional - Set this variable if your app is not available in the U.S. App Store. List of codes: https://developer.apple.com/library/content/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide/Appendices/AppStoreTerritories.html
 //        siren.countryCode = ""
@@ -59,8 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // To show the update immediately after Apple has updated their JSON, set this value to 0. Not recommended due to aforementioned reason in https://github.com/ArtSabintsev/Siren#words-of-caution.
 //        siren.showAlertAfterCurrentVersionHasBeenReleasedForDays = 3
 
-        // Required
-        siren.checkVersion(checkType: .immediately)
+        // Optional (Only do this if you don't call checkVersion in didBecomeActive)
+//        siren.checkVersion(checkType: .immediately)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -92,7 +92,7 @@ extension AppDelegate: SirenDelegate
         print(#function)
     }
 
-    func sirenDidFailVersionCheck(error: NSError) {
+    func sirenDidFailVersionCheck(error: Error) {
         print(#function, error)
     }
 
